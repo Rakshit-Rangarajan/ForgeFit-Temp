@@ -1280,10 +1280,20 @@ function quickChat(text) {
 
 function addBubble(text, who) {
   const d = document.createElement('div');
-  d.className = 'bubble bubble-'+who;
-  d.textContent = text;
+  d.className = 'bubble bubble-' + who;
+  
+  // If it's the AI, parse the Markdown (bolding and line breaks)
+  if (who === 'ai') {
+    d.innerHTML = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convert **text** to bold
+      .replace(/\n/g, '<br>');                          // Convert line breaks
+  } else {
+    d.textContent = text; // Keep user messages as safe raw text
+  }
+  
   const area = document.getElementById('chat-body');
-  area.appendChild(d); area.scrollTop=area.scrollHeight;
+  area.appendChild(d); 
+  area.scrollTop = area.scrollHeight;
   return d;
 }
 
