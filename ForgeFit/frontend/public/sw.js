@@ -1,4 +1,4 @@
-const CACHE = 'forgefit-v2';
+const CACHE = 'forgefit-v3';
 const STATIC = ['/', '/index.html', '/manifest.json'];
 
 self.addEventListener('install', e => {
